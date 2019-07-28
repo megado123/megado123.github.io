@@ -1,0 +1,14 @@
+   const data = await d3.csv(
+     'https://flunky.github.io/cars2017.csv');
+   d3.select('body')
+     .selectAll('p')
+     .data(data)
+     .enter()
+     .append('p')
+       .html(function(d,i) {return d.AverageHighwayMPG + "," + d.AverageCityMPG;});
+
+
+
+
+
+

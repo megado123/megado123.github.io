@@ -1,0 +1,85 @@
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<style> circle {fill: lightblue; stroke: black;} </style>
+<body>
+
+
+
+
+<svg width=300 height=300>
+</svg>
+
+<p>Show Labels
+	<select id="label-option">
+	<option value="all">All</option>
+	<option value="9E">9E</option>
+	<option value="AA">AA</option>
+</p>
+
+
+<button id="myBtn">TryIt </button>
+
+<script>
+
+   
+   const data = d3.csv(
+     'airline_delay_May_June_2018.csv');
+   var margin = {top: 50, right: 50, bottom: 50, left: 50},
+		width = 300 - margin.left - margin.right,
+		height = 300 - margin.top - margin.bottom;
+
+    console.log(d3.max(data, function(d) { return Number(d.count_ontime); }));
+	console.log('----');
+	
+	//var data_late_minutes_by_carrier_name = d3.group(data, d => d.carrier_name, d => d.total_lateminutes);
+	//var data_late_minutes_by_carrier_name = d3.group(data, d => d.carrier_name, d => d.count_ontime);
+	
+	
+	
+	var xmax = d3.max(data, function(d) { return Number(d.total_lateminutes); })
+	var ymax = d3.max(data, function(d) { return Number(d.count_ontime); })
+	console.log("xmax = " + xmax)
+	console.log("ymax = " + ymax)
+	var xvalues = d3.scaleLinear().domain([0, xmax]).range([0,200]);
+	var yvalues = d3.scaleLinear().domain([0,ymax]).range([height, 0]);
+	
+    var ylabels = d3.scaleLinear().domain([0,ymax]).range([height, 0]);
+	var xlabels = d3.scaleLinear().domain([0, xmax]).range([0,200]);
+
+    var yScale = d3.scaleLinear().domain([0,ymax]).range([height, 0]);
+	var xScale = d3.scaleLinear().domain([0,xmax]).range([0, width]);
+	
+	d3.select('body').select('svg').append('g')
+	 .attr("transform", "translate(50,50)")
+     .selectAll('circle')
+        .data(data)
+        .enter()
+		.append('circle')
+		.attr("cx", function(d) { return xvalues((d.total_lateminutes)); })
+		.attr("cy", function(d) { return yvalues((d.count_ontime)); })
+        .attr("r", function(d,i) { console.log(d.count_ontime); return ( 2 ); })
+
+	d3.select("svg")
+		.append("g")
+		.attr("transform", "translate(50,50)")
+		.call(d3.axisLeft(yScale))
+		//.call(d3.axisLeft(ylogScale).tickValues([10, 20, 50, 100]).tickFormat(d3.format("~s")) )
+		
+	d3.select("svg")
+		.append("g")
+		.attr("transform", "translate(50,250)")
+		.call(d3.axisBottom(xScale).tickValues([xmax/4, xmax/2, 3*xmax/4, xmax]).tickFormat(d3.format("~s")) )
+		
+
+
+
+
+
+	function myFunction(){
+	 alert("hello world");
+	 }
+
+
+</script>
+</body>
+</html>

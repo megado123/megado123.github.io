@@ -1,0 +1,46 @@
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<style> rect {fill: lightblue; stroke: black; }</style>
+<body>
+<svg width=300 height=300>
+</svg>
+<script>
+var data = [4,8,15,16,23,42];
+
+
+width = 200
+height = 200
+margin = 50
+
+var x = d3.scaleBand().domain([0,1,2,3,4,5]).range(0, width);
+var y = d3.scaleLinear().domain([0,42]).range([0, height]);
+
+var ylabels = d3.scaleLinear().domain([0,42]).range([height, 0]);
+var xlabels = d3.scaleBand().domain(["0", "1", "2", "3", "4", "5"]).range([0,200]);
+
+
+d3.select("svg").append("g")
+          .attr("transform", "translate(50,50)")
+	  .selectAll('rect')
+		.data([4,8,15,16,23,42])
+		.enter()
+		.append('rect')
+		.attr('x', function(d,i) {return i*(width/6);})
+		.attr('y',function(d,i)  {return 200 - y(d);})
+                .attr('width', width/6)
+		.attr('height',function(d,i) {return y(d);});
+		
+
+d3.select("svg")
+	.append("g")
+	.attr("transform", "translate(50,50)")
+	.call(d3.axisLeft(ylabels))
+	
+d3.select("svg")
+    .append("g")
+	.attr("transform", "translate(50,250)")
+	.call(d3.axisBottom(xlabels ));
+
+</script>
+</body>
+</html>
