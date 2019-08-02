@@ -1,26 +1,37 @@
 <!DOCTYPE html>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<body>
-        Hello 6
-        <p>Here are the magic numbers from lost: <span id="data"></span></p>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SVG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <script src="https://d3js.org/d3-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v3.min.js"></script>
 
-</body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="svg-container"></div>
 
+    <div class="controls">
+      <button data-name="count_ontime">% ontime name</button>
+      <button data-name="arr_del15">% Delayed by Aircraft</button>
+      <button data-name="carrier_ct">% Delayed by Carrier</button>
+      <button data-name="weather_ct">% Delayed by Weather</button>
+    </div>
+    
+    <script src="app.js"></script>
+  </body>
+  
 </html>
-
-<svg class="chart" width="120" height="500">
-</svg>
-
-<script>
-    var data = [4, 8, 15, 16, 23, 42];
-    document.getElementById("data").innerHTML = data;
-    d3.select(".chart").selectAll("rect").data(data)
-        .enter().append("rect")
-        .attr("width", 19)
-        .attr("height", function(d) {return 10*d;})
-        .attr("x", function(d,i) {return 20* i})
-        .attr("y", function(d) {return 420- 10*d;})
-</script>
-
-
-
