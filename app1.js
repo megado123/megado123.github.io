@@ -93,23 +93,19 @@ d3.csv('/data/airline_delay_causes.csv', type).then(res => {
   ready(res)
 });
 
-//var parse = d3.time.format("%Y").parse;
-
-
-
 function ready(data){
 var datasetprepped = prepBarChart(data)
 
-// Transpose the data into layers
-var dataset = d3.layout.stack()(["late_aircraft_percent", "carrier_pecent", "weather_percent", "nas_percent", "security_percent"].map(function(fruit) {
+const colors = ["33D5FF", "F3FF33", "#288E23", "#A933FF", "#FF3355"];
+
+// Transpose the data to layers
+var dataset = d3.layout.stack()(["late_aircraft_percent", "carrier_pecent", "weather_percent", "nas_percent", "security_percent"].map(function(temp) {
   return datasetprepped.map(function(d) {
-    return {x: d.name, y: +d[fruit]};
+    return {x: d.name, y: +d[temp]};
   });
 }));
 
-console.log(dataset);
-
-const colors = ["33D5FF", "F3FF33", "#288E23", "#A933FF", "#FF3355"];
+//console.log(dataset);
 
 
 //Setup the X and Y axis information
@@ -164,10 +160,10 @@ const ylabel =  svg
 
 
 // Create groups for each series, rects for each segment 
-var groups = svg.selectAll("g.cost")
+var groups = svg.selectAll("g.percent")
   .data(dataset)
   .enter().append("g")
-  .attr("class", "cost")
+  .attr("class", "percent")
   .style("fill", function(d, i) { return colors[i]; });
 
 var rect = groups.selectAll("rect")
@@ -216,8 +212,7 @@ legend.append("text")
     }
   });
 
-
-// Prep the tooltip bits, initial display is hidden
+// Prep the tooltip as the initial display is hidden
 var tooltip = svg.append("g")
   .attr("class", "tooltip")
   .style("display", "none");
@@ -231,7 +226,7 @@ tooltip.append("rect")
 tooltip.append("text")
   .attr("x", 15)
   .attr("dy", "1.2em")
-  .style("text-anchor", "middle")
-  .attr("font-size", "12px")
+  .style("text-anchor",  "middle")
+  .attr("font-size", "14px")
   .attr("font-weight", "bold");
 };
