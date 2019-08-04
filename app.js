@@ -127,6 +127,7 @@ function ready(data){
     const rolledUpDataWithIndex = check(rolledUpData)
     //debugger
 
+    //var logScale = d3.scaleLog()
     const xScale = d3
         .scaleLinear()
        .domain(TotalLastMinuteseMinAndMax)
@@ -159,7 +160,7 @@ function ready(data){
         .attr('transform', `translate(0 ${-margin.top/2})`)
         .append('text')
     
-    header.append('tspan').text('Scatter Plot')
+    header.append('tspan').text('Number of On Time Flights vs Total Late Minutes for Carrier Per Airport')
 
     //tooltip
     // add the tooltip area to the webpage
