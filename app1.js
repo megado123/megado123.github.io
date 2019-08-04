@@ -216,7 +216,7 @@ legend.append("text")
 const header = svg
         .append('g')
         .attr('class', 'scatter-header')
-        .attr('transform', `translate(250 ${-margin.top/2})`)
+        .attr('transform', `translate(250 ${(-margin.top/2) + 7})`)
         .append('text')
     
 header.append('tspan').text('% of Operations impacted by Cause Per Carrier')
