@@ -123,19 +123,19 @@ function ready(data){
             case
              "count_ontime":
 
-                header.text("% ontime of total flights")
+                header.text("% ontime of Total Flights")
                 break;
               
             case "arr_del15":
-                header.text("% delayed due to aircraft arrival delay")
+                header.text("% Delayed due to aircraft Arrival delay")
                 break;    
 
             case "carrier_ct":
-                header.text('% delayed due to carrier')
+                header.text('% Delayed due to Carrier')
                 break;
 
             case "weather_ct":
-                    header.text('% delayed due to weather')
+                    header.text('% Delayed due to Weather')
                     break;
             }
 
@@ -143,7 +143,14 @@ function ready(data){
             // add the tooltip area to the webpage
             const tooltip = d3.select("body").append("div")
             .attr("class", "tooltip")
-            .style("opacity", 0);
+            .attr("fill", "white")
+            .style("opacity", 0.5);
+
+            //tooltip.append("rect")
+            //.attr("width", 30)
+            //.attr("height", 20)
+            //.attr("fill", "white")
+            //.style("opacity", 0.5);
        
             const per= d3.format(".01%");
 

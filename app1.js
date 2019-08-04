@@ -76,7 +76,7 @@ function prepBarChart(data){
                 carrier_pecent:   carrier_ct_percent[i].percent, 
                 weather_percent:  weather_ct_percent[i].percent,
                 nas_percent: nas_ct_percent[i].percent,
-                security_percent: nas_ct_percent[i].percent,
+                security_percent: security_ct_percent[i].percent,
                 total: late_aircraft_ct_percent[i].percent + carrier_ct_percent[i].percent + weather_ct_percent[i].percent + nas_ct_percent[i].percent + nas_ct_percent[i].percent };
     all_percents[i] = bike;
   }
@@ -220,8 +220,7 @@ var tooltip = svg.append("g")
 tooltip.append("rect")
   .attr("width", 30)
   .attr("height", 20)
-  .attr("fill", "white")
-  .style("opacity", 0.5);
+  .style("opacity", 0);
 
 tooltip.append("text")
   .attr("x", 15)
