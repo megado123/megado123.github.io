@@ -1,4 +1,47 @@
-//leveraging: http://bl.ocks.org/mstanaland/6100713
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>d3.js learning</title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+  <script src="https://d3js.org/d3-time.v1.min.js"></script>
+  <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+  <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3-array.v2.min.js"></script>
+  <script src="https://d3js.org/d3-format.v1.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-array.v2.min.js"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+  <script src="https://d3js.org/d3-time.v1.min.js"></script>
+  <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+  <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+  <style type="text/css">
+  svg {
+    font: 10px sans-serif;
+    shape-rendering: crispEdges;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+  }
+ 
+  path.domain {
+    stroke: none;
+  }
+ 
+  .y .tick line {
+    stroke: #ddd;
+  }
+  </style>
+
+</head>
+<body>
+<script type="text/javascript">
 
 const parseNA = string => (string == 'NA' ? undefined: string);
 
@@ -33,8 +76,9 @@ function type(d)
 
     }
 } 
+// Setup svg using Bostock's margin convention
 
-const margin = {top: 20, right: 160,bottom: 40, left: 20};
+var margin = {top: 20, right: 160, bottom: 35, left: 30};
 
 var width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -47,6 +91,8 @@ var svg = d3.select("body")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
+/* Data in strings like it would be if imported from a csv */
+//
 function getCounts(data, metric)
 {
     const rolledUpFlightsByCarrier = d3.rollup(
@@ -108,48 +154,47 @@ var dataset = d3.layout.stack()(["late_aircraft_percent", "carrier_pecent", "wea
 
 console.log(dataset);
 
-const colors = ["33D5FF", "F3FF33", "#288E23", "#A933FF", "#FF3355"];
 
 
-//Setup the X and Y axis information
-const x = d3.scale.ordinal()
-  .domain(dataset[0].map(function(d) { console.log(d.x) ; return d.x; }))
+// Set x, y and colors
+var x = d3.scale.ordinal()
+  .domain(dataset[0].map(function(d) { return d.x; }))
   .rangeRoundBands([10, width-10], 0.02);
 
-  const x2 = d3.scale.ordinal()
-  .domain(dataset[0].map(function(d) { console.log(d.x) ; return d.x; }))
-  .rangeRoundBands([10 + (x.rangeBand()/2), width-10 +  (x.rangeBand()/2)], 0.02);
-
-
-const xlabels = d3.scaleBand()
-              .domain(dataset[0].map(function(d) { console.log(d.x) ; return d.x; }))
-              .range([10 + (x.rangeBand())  , width-10  ]);
-
-const y = d3.scale.linear()
+var y = d3.scale.linear()
   .domain([0, d3.max(dataset, function(d) {  return d3.max(d, function(d) { return d.y0 + d.y; });  })])
   .range([height, 0]);
 
+var colors = ["b33040", "#d25c4d", "#f2b447", "#d9d574", "#ddd"];
+
+
+
+//var xAxis = d3.svg.axis()
+//  .scale(x)
+//  .orient("bottom")
+//  .tickFormat(d3.time.format("%Y"));
+
+//svg.append("g")
+//  .attr("class", "x axis")
+//  .attr("transform", "translate(0," + height + ")")
+//  .call(xAxis);
 
 const yAxisDraw = svg
         .append('g')
         .attr('class', 'y axis')
-        .attr("transform", "translate(15," + "0" + ")")
     
 //Draw axes
 const yAxis = d3.axisLeft(y).tickSize(0);
     yAxisDraw.call(yAxis)
 
-svg.append("g")
-.attr("transform", "translate(0," + height + ")")
-.call(d3.axisBottom(x2));
+const xAxisDraw = svg
+    .append('g')
+    .attr('class', 'x axis')
+    .attr("transform", "translate(0," + height + ")")
 
-// text label for the x axis
-svg.append("text")             
-.attr("transform",
-      "translate(" + (width/2) + " ," + 
-                     (height + margin.top + 10) + ")")
-.style("text-anchor", "middle")
-.text("Carriers");
+
+const xAxis = d3.axisBottom(x).tickSize(0);
+    xAxisDraw.call(xAxis);
 
 
 // Create groups for each series, rects for each segment 
@@ -224,3 +269,8 @@ tooltip.append("text")
   .attr("font-size", "12px")
   .attr("font-weight", "bold");
 };
+
+
+</script>
+</body>
+</html>

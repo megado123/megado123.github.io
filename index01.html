@@ -23,13 +23,24 @@
   </head>
   <body>
     <h2>An interactive Story</h2>
-    <p>Leveraging data from the <a href="https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp?pn=1">Bureau of Transportation Statistics</a> We can investigate per airline their average on-time arrivals and causes for delay by airline.  The data has been averaged to provide an over-all average of on time flights per airline, as well as averaged for specific delay causes, sorted by the highest average so you can decide which airlines to fly, as well as which to avoid overall.</p>
-    
-    <a href="index01.html" class="next round">&#8250;</a>
+    <p>Leveraging data from the <a href="https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp?pn=1">Bureau of Transportation Statistics</a>we can investigate per airline their average on-time arrivals and causes for delay by airline.  The data has been averaged to provide an over-all average of on time flights per airline, as well as averaged for specific delay causes, sorted by the highest average so you can decide which airlines to fly, as well as which to avoid overall.</p>
 
-    <div class="svg-container"></div>
+
+    <a href="index.html" class="previous round">&#8249;</a>
+    <a href="index02.html" class="next round">&#8250;</a>
+
+    <div class="controls">
+      <button data-name="arr_del15">% Delayed by Aircraft</button>
+      <button data-name="carrier_ct">% Delayed by Carrier</button>
+      <button data-name="weather_ct">% Delayed by Weather</button>
+      <button data-name="count_ontime">% ontime name</button>
+    </div>
     
-    <script src="app.js"></script>
+    <div class="svg-container"></div>
+
+
+    
+    <script src="app01.js"></script>
   </body>
   
 </html>
