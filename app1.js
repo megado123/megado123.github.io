@@ -211,6 +211,15 @@ legend.append("text")
       case 4: return "Late aircraft delay"
     }
   });
+  
+  //Draw a header
+const header = svg
+        .append('g')
+        .attr('class', 'scatter-header')
+        .attr('transform', `translate(250 ${-margin.top/2})`)
+        .append('text')
+    
+header.append('tspan').text('% of Operations impacted by Cause Per Carrier')
 
 // Prep the tooltip as the initial display is hidden
 var tooltip = svg.append("g")
