@@ -184,7 +184,7 @@ var rect = groups.selectAll("rect")
     var xPosition = d3.mouse(this)[0] - 15;
     var yPosition = d3.mouse(this)[1] - 25;
     tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-    tooltip.select("text").text(d.y.toFixed(2));
+    tooltip.select("text").text(d.y.toFixed(2) + "%");
   });
 
 
